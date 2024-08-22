@@ -20,7 +20,7 @@ const Page = () => {
  <section>
  
   <div className=' bg-gradient-to-tr from-pink-500  to-cyan-600  '>
-    <h1 className=' text-8xl  text-white  font-serif text-center  '>vision</h1>
+    <h1 className=' text-8xl  text-white  font-serif text-center  '>visimmmon</h1>
     <div className='w-1/4 h-[90%] absolute bg-black bg-opacity-75 right-1 mt-10 rounded-3xl '>
        <p className='text-center font-sans3 text-2xl text-white p-3 py-8'>Our vision is to lead the construction industry by delivering innovative, sustainable, and high-quality projects that stand the test of time. We aim to build not just structures, but vibrant communities that enhance quality of life. Through excellence, integrity, and a commitment to our clients, we strive to leave a lasting legacy in every project we undertake.</p>
        

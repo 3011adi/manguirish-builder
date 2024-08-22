@@ -120,7 +120,7 @@ scene.add(plane);
   }
   
   
-      Array(150).fill().forEach(addtree);
+      Array(150).fill(null).forEach(addtree);
 
     const spaceTexture = new THREE.TextureLoader().load('./space.jpeg');
     scene.background = spaceTexture;
