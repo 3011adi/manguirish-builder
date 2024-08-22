@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react'
 import Image from 'next/image';
+import Nav from '../nav';
 const Home = () => {
     const [borderRadius1, setBorderRadius1] = useState('54% 46% 27% 73% / 71% 43% 57% 29% ');
   const [borderRadius2, setBorderRadius2] = useState('76% 24% 27% 73% / 65% 56% 44% 35%');
@@ -31,10 +32,8 @@ const Home = () => {
     <div> <section className='bg-gradient-to-l from-black to-gray-800'>
     <div className='grid grid-cols-10'>
      <div className='bg-red-6 col-span-1 flex items-center justify-center   '>
-     <div className='rotate-90 bg-gradient-to-l from-red-600 to-blue-600 px-20 opacity-85 rounded-ss-full rounded-ee-full fixed shadow-sm shadow-red-500 m-5'>
-<h1 className='text-9xl leading-none font-serif  font-semibold'>our  projects</h1>
-</div>
-     </div>
+     <Nav />
+    </div>
      <div className='flex items-center justify-center  col-span-4 '>
 <div className='px-12'>
 <h1 className='text-8xl font-semibold text-white font-serif' >manguirish builders</h1>

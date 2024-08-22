@@ -8,6 +8,7 @@ import In from '../components/in';
 import B from '../components/b';
 import Carousel1 from '../components/carousel';
 import Map from '../components/map';
+import Footer from '../components/footer';
 const Page = () => {
   
 
@@ -52,11 +53,11 @@ const Page = () => {
  </section>
  <h1 className='text-center font-serif text-8xl text-white bg-gray-600 p-3'> layout</h1>
  <section className=' bg-gray-600  '>   
- <div className='grid grid-cols-6 '>
+ <div className='grid grid-cols-8 '>
  <div className=' '>
   
  </div>
- <div className=' col-span-2 flex items-center'>
+ <div className=' col-span-3 flex items-center'>
   <div className='bg-gradient-to-r from-black via-slate-600 to-slate-400 bg-opacity-55  w-[90%] h-[90%] rounded-3xl '>
   <h1 className='text-center  text-black font-serif text-6xl '>  interior</h1>
   <p className='text-center font-sans3 text-white text-2xl px-6 pt-3'> Discover this luxurious and fully furnished flat spanning 320 square meters, offering a blend of elegance and comfort. This spacious residence features two beautifully designed bedrooms, perfect for rest and relaxation. The heart of the home includes not one, but two state-of-the-art kitchens, each adorned with sleek granite countertops, providing ample space for cooking and entertaining.
@@ -65,7 +66,7 @@ Ideal for families or those who love to host, this flat offers both functionalit
   </div>
  </div>
  
-  <div className='bg-gradient-to-r from-red-500 to-blue-500 col-span-3 h-[90%] my-9 mx-4 rounded-3xl'>
+  <div className='bg-gradient-to-r from-red-500 to-blue-500 col-span-4 h-[90%] my-9 mx-4 rounded-3xl'>
   <In/>
   </div>
   </div>
@@ -77,7 +78,11 @@ Ideal for families or those who love to host, this flat offers both functionalit
     <div className=' p-4 rounded-3xl'><Map/></div>
     <div className='p-4 '><Carousel1 /></div>
   </div>
+  <div className='flex items-center justify-end p-5'>
+  <a href=''> <h1 className='text-white  text-3xl  m-5 rounded-3xl shadow-lg shadow-white bg-gradient-to-r from-red-500 to-blue-500  flex items-center p-2 px-8 justify-center bottom-0'> price 80lk</h1> </a>
+  </div>
 </section>
+<Footer />
  </div>
   )
 }

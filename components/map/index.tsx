@@ -2,7 +2,8 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const Map = () => {
-  const position = [15.5933, 73.8085];; // Replace with your exact location
+  // Explicitly typing the position as a tuple of two numbers (latitude and longitude)
+  const position: [number, number] = [15.5933, 73.8085]; // Replace with your exact location
 
   return (
     <MapContainer center={position} zoom={50} style={{ height: "65vh", width: "100%" }}>
