@@ -1,5 +1,5 @@
 import React from 'react'
-
+import Image from 'next/image'
 const Footer = () => {
   return (
     <div>
@@ -8,7 +8,13 @@ const Footer = () => {
           <div className="grid xl:grid-cols-4 sm:grid-cols-1 sm:py-5 space-x-2  sm:space-y-6 xl:space-y-0  xl:w-3/4  xl:py-20">
             <div className="  text-white text-3xl   ">
               <div className=' flex sm:justify-center xl:justify-center '>
-            <img src='./assets/group 6.png' alt="Description of image" style={{ width: '90px', height: '200px' }} className='' />
+              <Image
+className='  '
+src="/assets/group 6.png" // Route of the image file
+height={70} // Desired size
+width={70}
+alt="Description of the image"
+/>
             </div>
               <h1 className=" sm:text-center xl:text-center ">Manguirish <br />builders</h1>
             </div>
@@ -38,8 +44,13 @@ const Footer = () => {
         </div>
         <a href="#home">
   <div className="flex xl:justify-end sm:justify-center px-6 b pb-6">
-    <img src='' style={{ width: '80px', height: '80px' }} className='bg-[#958f8c] bg-opacity-20 rounded-full'/>
-
+  <Image
+className='  '
+src="/assets/arrow.png" // Route of the image file
+height={80} // Desired size
+width={80}
+alt="Description of the image"
+/>
   </div>
 </a>
         <div className=" bg-gradient-to-r from-red-500 h-1 to-blue-500"></div>
