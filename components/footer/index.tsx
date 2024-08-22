@@ -10,7 +10,7 @@ const Footer = () => {
               <div className=' flex sm:justify-center xl:justify-center '>
               <Image
 className='  '
-src="/assets/group 6.png" // Route of the image file
+src="/assets/Group 7.png" // Route of the image file
 height={70} // Desired size
 width={70}
 alt="Description of the image"
