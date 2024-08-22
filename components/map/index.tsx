@@ -6,7 +6,7 @@ const Map = () => {
   const position: [number, number] = [15.5933, 73.8085]; // Replace with your exact location
 
   return (
-    <MapContainer center={position as any} zoom={13} style={{ height: "100vh", width: "100%" }}>
+    <MapContainer zoom={13} style={{ height: "100vh", width: "100%" }}>
     <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
