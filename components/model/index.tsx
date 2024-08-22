@@ -88,7 +88,7 @@ scene.add(plane);
       scene.add(star);
     }
 
-    Array(200).fill().forEach(addbuild);
+    Array(200).fill(null).forEach(addbuild);
 
     function addtree() {
       // Create the cylinder for the tree trunk
