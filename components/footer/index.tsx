@@ -15,22 +15,24 @@ const Footer = () => {
             <div className=" text-white  space-y-2 flex justify-center ">
                 <div className='grid grid-cols-1'>
               <h1 className="text-xl text-gray-400 text-center xl:text-start" >links</h1>
-              <a href="#how" className="text-center xl:text-start">how it works</a>
-              <a href="#qual" className="text-center xl:text-start">quality</a>
-              <a href="#prod" className="text-center xl:text-start">gallery</a>
-              <a href="https://wa.me/+91 98505 40400"className="text-center xl:text-start">contact</a>
+              <a href="#home" className="text-center xl:text-start">home</a>
+              <a href="#layout" className="text-center xl:text-start">layout</a>
+              <a href="#upcoming" className="text-center xl:text-start">upcoming</a>
+              <a href="#details" className="text-center xl:text-start">details</a>
+              <a href="#about" className="text-center xl:text-start">about us</a>
+              <a href="https://wa.me/+919850455290" className="text-center xl:text-start">contact</a>
               </div>
             </div>
             <div className=" text-white">
               <h1 className="text-xl text-gray-400 sm:text-center xl:text-start ">contact</h1>
-              <h1 className="py-2 sm:text-center xl:text-start underline">+91 98505 40400</h1>
-              <h1 className="sm:text-center xl:text-start underline">Autumninteriorsgoa@gmail.com</h1>
+              <h1 className="py-2 sm:text-center xl:text-start underline">+91 9850455290</h1>
+              <h1 className="sm:text-center xl:text-start underline">mangirish.builders@gmail.com</h1>
             </div>
-            <div className="  text-white xl:flex xl:flex-col sm:justify-center  sm:align-middle  ">
+            <div className="  text-white xl:flex justify-center  sm:align-middle  ">
+               <div className=''>
               <h1 className=" sm:text-center xl:text-center text-xl font-semibold">ADRESS</h1>
-               <h1 className='xl:text-center py-2 px-2'>Autumn Design Studio
-D. S. Harmony, Shop No. 2, Opp. Chowgule College, Gogol
-Margao - Salcete - Goa.</h1>
+               <h1 className='xl:text-center py-2 px-8 '>Opposite To Hotel Spice Goa, Near Karaswada Sicle, Mapusa, North Goa, Goa</h1>
+</div>
             </div>
           </div>
         </div>
