@@ -60,7 +60,7 @@ const Page = () => {
  <div className=' col-span-3 flex items-center'>
   <div className='bg-gradient-to-r from-black via-slate-600 to-slate-400 bg-opacity-55  w-[90%] h-[90%] rounded-3xl '>
   <h1 className='text-center  text-black font-serif text-6xl '>  interior</h1>
-  <p className='text-center font-sans3 text-white text-2xl px-6 pt-3'> Discover this luxurious and fully furnished flat spanning 320 square meters, offering a blend of elegance and comfort. This spacious residence features two beautifully designed bedrooms, perfect for rest and relaxation. The heart of the home includes not one, but two state-of-the-art kitchens, each adorned with sleek granite countertops, providing ample space for cooking and entertaining.
+  <p className='text-center font-sans3 text-white text-xl px-12 pt-6'> Discover this luxurious and fully furnished flat spanning 320 square meters, offering a blend of elegance and comfort. This spacious residence features two beautifully designed bedrooms, perfect for rest and relaxation. The heart of the home includes not one, but two state-of-the-art kitchens, each adorned with sleek granite countertops, providing ample space for cooking and entertaining.
 
 Ideal for families or those who love to host, this flat offers both functionality and style in a prime location. The modern furnishings complement the high-quality finishes throughout, ensuring a move-in ready experience.</p>
   </div>
