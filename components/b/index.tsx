@@ -75,7 +75,6 @@ const B = () => {
       color: 0x708090,
       shininess: 300,
       specular: 0xffffff,
-      metalness: 0.8
     });
 
     // Create main cylindrical tower - scaled down
