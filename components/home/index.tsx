@@ -289,8 +289,8 @@ const Home = () => {
                 <div ref={heroTextRef} className='space-y-2'>
                   <h1 className='font-display text-5xl sm:text-6xl lg:text-8xl font-light text-white tracking-tight leading-none'>
                     <span className='block font-heading font-extralight text-gray-300 text-4xl sm:text-5xl lg:text-6xl mb-2 tracking-[0.15em] uppercase'>
-                      manguirish
-                    </span>
+                    manguirish
+                  </span>
                     <span className='font-display text-gradient-gold font-bold tracking-tighter'>
                       BUILDERS
                     </span>
@@ -299,7 +299,7 @@ const Home = () => {
                 
                                  <h2 ref={subtitleRef} className='font-heading text-sm sm:text-base lg:text-lg text-amber-200/90 font-medium tracking-[0.2em] uppercase min-h-[1.5rem]'>
                    {/* Animated text will appear here */}
-                 </h2>
+                </h2>
 
                  <p ref={descriptionRef} className='font-body text-gray-300 text-lg lg:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0 font-light'>
                    Delivering architectural excellence and construction mastery through innovative design, 
@@ -321,12 +321,12 @@ const Home = () => {
                    <div className='font-display text-2xl lg:text-3xl font-bold text-gradient-gold'>100%</div>
                    <div className='font-heading text-xs lg:text-sm text-gray-400 uppercase tracking-wider'>Quality</div>
                  </div>
-               </div>
+              </div>
               
               {/* Premium Call to Action */}
               <div className='pt-8 lg:pt-12'>
-                                 <button 
-                   ref={buttonRef}
+                <button 
+                  ref={buttonRef}
                    className='group btn-premium font-heading px-8 lg:px-12 py-4 lg:py-5 text-sm lg:text-base border border-amber-500/20 focus-premium'
                   onMouseEnter={(e) => {
                     gsap.to(e.target, {
