@@ -30,27 +30,128 @@ const Page = () => {
   </div>
  </section>
 
- <section className='min-h-screen' id='upcoming'>
-  <h1 className='text-center bg-black text-white font-serif p-8 text-8xl'>upcoming projects</h1>
- <div className='grid grid-cols-2 '>
-  <div className=' bg-black'><A/></div>
-  <div className='bg-black flex justify-center'>
-    <div className='bg-gradient-to-r from-red-500 to-blue-500 m-8 w-2/3 rounded-xl shadow-xl shadow-red-500'>
-    <h1 className=' text-5xl  text-white  font-serif text-center  '>project no 1</h1>
-    <p  className='text-center p-8'>jejdejdedjwkdnwendwj <br />eknewknwekjnew <br />jknweckjewndjkwendw
-    jejdejdedjwkdnwendwj <br />eknewknwekjnew <br />jknweckjewndjkwendw</p>
+ {/* Premium Upcoming Projects Section */}
+ <section className='min-h-screen bg-gradient-to-br from-slate-950 via-gray-900 to-stone-900 py-20' id='upcoming'>
+  <div className='max-w-7xl mx-auto px-8'>
+    {/* Premium Section Header */}
+    <div className='text-center mb-16'>
+      <div className='w-20 h-0.5 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 mx-auto mb-8'></div>
+      <h1 className='font-display text-5xl lg:text-7xl font-light text-white tracking-tight leading-none mb-6'>
+        <span className='text-gradient-gold font-bold'>UPCOMING</span>
+        <br />
+        <span className='font-heading font-extralight text-gray-300 text-3xl lg:text-5xl tracking-[0.15em] uppercase'>
+          PROJECTS
+        </span>
+      </h1>
+      <p className='font-body text-gray-300 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto'>
+        Discover our forthcoming developments that represent the pinnacle of architectural innovation and construction excellence.
+      </p>
+    </div>
+
+    {/* Premium Projects Grid */}
+    <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16'>
+      
+      {/* Project 1 */}
+      <div className='group relative'>
+        <div className='glass-premium border border-amber-500/10 rounded-3xl p-8 lg:p-12 shadow-premium hover:shadow-gold transition-all duration-500 hover:border-amber-500/20'>
+          <div className='flex flex-col lg:flex-row items-center gap-8'>
+            <div className='w-full lg:w-1/2'>
+              <div className='bg-gradient-to-br from-slate-800 to-gray-800 rounded-2xl p-6 h-64 flex items-center justify-center border border-amber-500/10'>
+                <A />
+              </div>
+            </div>
+            <div className='w-full lg:w-1/2 space-y-6'>
+              <div>
+                <div className='flex items-center gap-4 mb-4'>
+                  <div className='w-12 h-0.5 bg-gradient-to-r from-amber-400 to-amber-500'></div>
+                  <span className='font-heading text-amber-400 text-sm uppercase tracking-wider'>Project Alpha</span>
+                </div>
+                <h3 className='font-display text-3xl lg:text-4xl font-bold text-gradient-gold mb-4'>
+                  Modern Residential Tower
+                </h3>
+                <p className='font-body text-gray-300 leading-relaxed mb-6'>
+                  A cutting-edge residential development featuring contemporary architecture, sustainable design principles, and luxury amenities. This premium tower will redefine urban living with its innovative approach to space utilization.
+                </p>
+              </div>
+              <div className='flex flex-wrap gap-4'>
+                <div className='glass-gold px-4 py-2 rounded-lg'>
+                  <span className='font-heading text-amber-200 text-sm uppercase tracking-wider'>30 Floors</span>
+                </div>
+                <div className='glass-gold px-4 py-2 rounded-lg'>
+                  <span className='font-heading text-amber-200 text-sm uppercase tracking-wider'>Luxury Units</span>
+                </div>
+                <div className='glass-gold px-4 py-2 rounded-lg'>
+                  <span className='font-heading text-amber-200 text-sm uppercase tracking-wider'>2024</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Project 2 */}
+      <div className='group relative'>
+        <div className='glass-premium border border-amber-500/10 rounded-3xl p-8 lg:p-12 shadow-premium hover:shadow-gold transition-all duration-500 hover:border-amber-500/20'>
+          <div className='flex flex-col lg:flex-row items-center gap-8'>
+            <div className='w-full lg:w-1/2 order-2 lg:order-1 space-y-6'>
+              <div>
+                <div className='flex items-center gap-4 mb-4'>
+                  <div className='w-12 h-0.5 bg-gradient-to-r from-amber-400 to-amber-500'></div>
+                  <span className='font-heading text-amber-400 text-sm uppercase tracking-wider'>Project Beta</span>
+                </div>
+                <h3 className='font-display text-3xl lg:text-4xl font-bold text-gradient-gold mb-4'>
+                  Commercial Complex
+                </h3>
+                <p className='font-body text-gray-300 leading-relaxed mb-6'>
+                  An innovative commercial development designed to accommodate modern business needs. Featuring flexible office spaces, retail areas, and state-of-the-art infrastructure for the future of commerce.
+                </p>
+              </div>
+              <div className='flex flex-wrap gap-4'>
+                <div className='glass-gold px-4 py-2 rounded-lg'>
+                  <span className='font-heading text-amber-200 text-sm uppercase tracking-wider'>25 Floors</span>
+                </div>
+                <div className='glass-gold px-4 py-2 rounded-lg'>
+                  <span className='font-heading text-amber-200 text-sm uppercase tracking-wider'>Mixed Use</span>
+                </div>
+                <div className='glass-gold px-4 py-2 rounded-lg'>
+                  <span className='font-heading text-amber-200 text-sm uppercase tracking-wider'>2025</span>
+                </div>
+              </div>
+            </div>
+            <div className='w-full lg:w-1/2 order-1 lg:order-2'>
+              <div className='bg-gradient-to-br from-slate-800 to-gray-800 rounded-2xl p-6 h-64 flex items-center justify-center border border-amber-500/10'>
+                <B />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    {/* Premium CTA Section */}
+    <div className='text-center mt-20'>
+      <div className='glass-premium border border-amber-500/10 rounded-2xl p-12 shadow-premium'>
+        <h3 className='font-display text-2xl lg:text-3xl font-bold text-gradient-gold mb-6'>
+          Interested in Our Upcoming Projects?
+        </h3>
+        <p className='font-body text-gray-300 text-lg mb-8 max-w-2xl mx-auto'>
+          Get exclusive early access to floor plans, pricing, and investment opportunities for our premium developments.
+        </p>
+        <a 
+          href='https://wa.me/+919850455290' 
+          className='inline-flex items-center gap-3 btn-premium font-heading px-8 py-4 text-base border border-amber-500/20 focus-premium'
+        >
+          <span className="relative z-10">Contact for Details</span>
+          <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+      </div>
     </div>
   </div>
-  <div className='bg-black flex justify-center pl-8'>
-  <div className='bg-gradient-to-r from-red-500 to-blue-500 m-8 w-2/3  shadow-xl shadow-blue-500 rounded-xl'>
-    <h1 className=' text-5xl  text-white  font-serif text-center  '>project no 1</h1>
-    <p  className='text-center p-8'>jejdejdedjwkdnwendwj <br />eknewknwekjnew <br />jknweckjewndjkwendw
-    jejdejdedjwkdnwendwj <br />eknewknwekjnew <br />jknweckjewndjkwendw</p>
-    </div>
-  </div>
-  <div className='bg-black pt-1'><B/></div>
-</div>
- </section >
+ </section>
+
  <h1 className='text-center font-serif text-8xl text-white bg-gray-600 p-3'> layout</h1>
  <section className=' bg-gray-600   ' id='layout'>   
  <div className='grid grid-cols-8 '>
