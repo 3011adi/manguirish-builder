@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 const Model = () => {
   const mountRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<THREE.Scene>();
   const cameraRef = useRef<THREE.PerspectiveCamera>();
   const rendererRef = useRef<THREE.WebGLRenderer>();
-  const controlsRef = useRef<OrbitControls>();
+  const controlsRef = useRef<any>();
   const buildingsRef = useRef<THREE.Group>();
   const particlesRef = useRef<THREE.Points>();
   const vehiclesRef = useRef<THREE.Group>();
@@ -16,10 +15,10 @@ const Model = () => {
   useEffect(() => {
     if (!mountRef.current) return;
 
-    // Scene setup
+    // Scene setup with homepage colors
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    scene.fog = new THREE.Fog(0x0a0a1a, 20, 300);
+    scene.fog = new THREE.Fog(0x0f1419, 20, 300); // Dark navy fog
 
     // Camera setup
     const camera = new THREE.PerspectiveCamera(
@@ -32,41 +31,38 @@ const Model = () => {
     camera.position.set(0, 40, 80);
 
     // Renderer setup
-const renderer = new THREE.WebGLRenderer({
+    const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true
-});
+    });
     rendererRef.current = renderer;
     renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.5;
+    renderer.toneMappingExposure = 1.2;
     mountRef.current.appendChild(renderer.domElement);
 
-    // Controls setup
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controlsRef.current = controls;
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.03;
-    controls.enableZoom = true;
-    controls.enablePan = false;
-    controls.minDistance = 30;
-    controls.maxDistance = 150;
-    controls.minPolarAngle = 0.3;
-    controls.maxPolarAngle = Math.PI / 2.2;
-    controls.autoRotate = true;
-    controls.autoRotateSpeed = 0.3;
+    // Simple controls (OrbitControls equivalent)
+    let mouseX = 0, mouseY = 0;
+    let targetX = 0, targetY = 0;
+    
+    const handleMouseMove = (event: MouseEvent) => {
+      mouseX = (event.clientX - window.innerWidth / 2) / 100;
+      mouseY = (event.clientY - window.innerHeight / 2) / 100;
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
 
-    // Advanced city ground with circuit patterns
+    // City ground with homepage-themed circuit patterns
     const groundGeometry = new THREE.PlaneGeometry(400, 400, 100, 100);
     const groundMaterial = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        color1: { value: new THREE.Color(0x001122) },
-        color2: { value: new THREE.Color(0x003344) }
+        color1: { value: new THREE.Color(0x1a1f2e) }, // Dark navy base
+        color2: { value: new THREE.Color(0x2a3441) }  // Slightly lighter navy
       },
       vertexShader: `
         varying vec2 vUv;
@@ -87,9 +83,10 @@ renderer.setPixelRatio(window.devicePixelRatio);
           float pulse = sin(time * 2.0 + vUv.x * 10.0) * 0.5 + 0.5;
           
           vec3 finalColor = mix(color1, color2, lines * pulse);
-          finalColor += vec3(0.0, 0.5, 1.0) * lines * pulse * 0.3;
+          // Golden accent lines
+          finalColor += vec3(1.0, 0.6, 0.1) * lines * pulse * 0.4;
           
-          gl_FragColor = vec4(finalColor, 0.8);
+          gl_FragColor = vec4(finalColor, 0.9);
         }
       `,
       transparent: true
@@ -99,7 +96,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
     ground.receiveShadow = true;
     scene.add(ground);
 
-    // Energy grid overlay
+    // Golden energy grid overlay
     const gridGeometry = new THREE.BufferGeometry();
     const gridPositions = [];
     const gridColors = [];
@@ -107,11 +104,11 @@ renderer.setPixelRatio(window.devicePixelRatio);
     for (let i = -200; i <= 200; i += 10) {
       // Vertical lines
       gridPositions.push(i, 0, -200, i, 0, 200);
-      gridColors.push(0, 0.8, 1, 0, 0.8, 1, 0, 0.8, 1, 0, 0.8, 1);
+      gridColors.push(1.0, 0.6, 0.1, 1.0, 0.6, 0.1, 1.0, 0.6, 0.1, 1.0, 0.6, 0.1); // Golden
       
       // Horizontal lines
       gridPositions.push(-200, 0, i, 200, 0, i);
-      gridColors.push(0, 0.8, 1, 0, 0.8, 1, 0, 0.8, 1, 0, 0.8, 1);
+      gridColors.push(1.0, 0.6, 0.1, 1.0, 0.6, 0.1, 1.0, 0.6, 0.1, 1.0, 0.6, 0.1); // Golden
     }
     
     gridGeometry.setAttribute('position', new THREE.Float32BufferAttribute(gridPositions, 3));
@@ -120,7 +117,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
     const gridMaterial = new THREE.LineBasicMaterial({
       vertexColors: true,
       transparent: true,
-      opacity: 0.2
+      opacity: 0.15
     });
     const gridLines = new THREE.LineSegments(gridGeometry, gridMaterial);
     gridLines.position.y = 0.1;
@@ -131,31 +128,31 @@ renderer.setPixelRatio(window.devicePixelRatio);
     buildingsRef.current = buildings;
     scene.add(buildings);
 
-    // Create advanced futuristic buildings
-    const createAdvancedBuilding = (x: number, z: number, height: number, type: number) => {
+    // Create homepage-themed futuristic buildings
+    const createThemedBuilding = (x: number, z: number, height: number, type: number) => {
       const buildingGroup = new THREE.Group();
 
       if (type === 0) {
-        // Neo-Gothic Spire with holographic elements
+        // Golden Neo-Gothic Spire
         const mainGeometry = new THREE.CylinderGeometry(1, 4, height, 8);
         const mainMaterial = new THREE.MeshPhongMaterial({
-          color: 0x1a1a3a,
+          color: 0x2a3441, // Dark navy
           transparent: true,
           opacity: 0.9,
-          emissive: 0x000055
+          emissive: 0x1a1f2e
         });
         const mainBuilding = new THREE.Mesh(mainGeometry, mainMaterial);
         mainBuilding.position.y = height / 2;
         mainBuilding.castShadow = true;
         buildingGroup.add(mainBuilding);
 
-        // Holographic rings
+        // Golden energy rings
         for (let i = 0; i < 5; i++) {
           const ringGeometry = new THREE.TorusGeometry(3 + i * 0.5, 0.1, 8, 16);
           const ringMaterial = new THREE.MeshBasicMaterial({
-            color: new THREE.Color().setHSL(0.6 + i * 0.1, 1, 0.5),
+            color: new THREE.Color(1.0, 0.6 + i * 0.05, 0.1), // Golden gradient
             transparent: true,
-            opacity: 0.6
+            opacity: 0.7
           });
           const ring = new THREE.Mesh(ringGeometry, ringMaterial);
           ring.position.y = height * 0.2 + i * (height * 0.15);
@@ -163,10 +160,10 @@ renderer.setPixelRatio(window.devicePixelRatio);
           buildingGroup.add(ring);
         }
 
-        // Energy beam
+        // Golden energy beam
         const beamGeometry = new THREE.CylinderGeometry(0.2, 0.2, height * 1.5, 8);
         const beamMaterial = new THREE.MeshBasicMaterial({
-          color: 0x00ffff,
+          color: 0xffa500, // Orange-gold
           transparent: true,
           opacity: 0.8
         });
@@ -175,27 +172,27 @@ renderer.setPixelRatio(window.devicePixelRatio);
         buildingGroup.add(beam);
 
       } else if (type === 1) {
-        // Crystal Tower
+        // Grey Steel Tower
         const crystalGeometry = new THREE.ConeGeometry(3, height, 6);
         const crystalMaterial = new THREE.MeshPhongMaterial({
-          color: 0x4a0e4e,
+          color: 0x4a4a4a, // Medium grey
           transparent: true,
-          opacity: 0.8,
-          emissive: 0x220044,
-          shininess: 100
+          opacity: 0.9,
+          emissive: 0x1a1a1a, // Dark grey emissive
+          shininess: 30
         });
         const crystal = new THREE.Mesh(crystalGeometry, crystalMaterial);
         crystal.position.y = height / 2;
         crystal.castShadow = true;
         buildingGroup.add(crystal);
 
-        // Floating crystal shards
+        // Grey floating panels
         for (let i = 0; i < 8; i++) {
-          const shardGeometry = new THREE.OctahedronGeometry(0.5);
+          const shardGeometry = new THREE.BoxGeometry(1, 0.1, 1);
           const shardMaterial = new THREE.MeshBasicMaterial({
-            color: new THREE.Color().setHSL(0.8 + i * 0.02, 1, 0.6),
+            color: new THREE.Color(0.6 + i * 0.02, 0.6 + i * 0.02, 0.6 + i * 0.02), // Grey variations
             transparent: true,
-            opacity: 0.7
+            opacity: 0.8
           });
           const shard = new THREE.Mesh(shardGeometry, shardMaterial);
           const angle = (i / 8) * Math.PI * 2;
@@ -208,34 +205,34 @@ renderer.setPixelRatio(window.devicePixelRatio);
         }
 
       } else if (type === 2) {
-        // Mega Structure with platforms
+        // Grey Mega Structure
         const baseGeometry = new THREE.BoxGeometry(6, height * 0.3, 6);
         const baseMaterial = new THREE.MeshPhongMaterial({
-          color: 0x2a2a5a,
-          emissive: 0x000033
+          color: 0x3a3a3a, // Dark grey
+          emissive: 0x1a1a1a
         });
         const base = new THREE.Mesh(baseGeometry, baseMaterial);
         base.position.y = height * 0.15;
         base.castShadow = true;
         buildingGroup.add(base);
 
-        // Multiple platforms
+        // Grey accent platforms
         for (let i = 1; i <= 4; i++) {
           const platformGeometry = new THREE.CylinderGeometry(4 - i * 0.5, 4 - i * 0.5, 0.5, 8);
           const platformMaterial = new THREE.MeshPhongMaterial({
-            color: 0x3a3a6a,
-            emissive: new THREE.Color().setHSL(0.6, 0.5, 0.1)
+            color: 0x555555, // Medium grey
+            emissive: new THREE.Color(0.1, 0.1, 0.1) // Grey emissive
           });
           const platform = new THREE.Mesh(platformGeometry, platformMaterial);
           platform.position.y = height * 0.3 + i * (height * 0.15);
           buildingGroup.add(platform);
 
-          // Energy conduits
+          // Grey energy conduits
           const conduitGeometry = new THREE.CylinderGeometry(0.1, 0.1, height * 0.15, 8);
           const conduitMaterial = new THREE.MeshBasicMaterial({
-            color: 0x00ff88,
+            color: 0x777777, // Light grey
             transparent: true,
-            opacity: 0.8
+            opacity: 0.9
           });
           for (let j = 0; j < 4; j++) {
             const conduit = new THREE.Mesh(conduitGeometry, conduitMaterial);
@@ -250,14 +247,14 @@ renderer.setPixelRatio(window.devicePixelRatio);
         }
 
       } else {
-        // Twisted Helix Tower
+        // Grey Twisted Helix Tower
         const helixGroup = new THREE.Group();
         
         for (let i = 0; i < height; i += 2) {
           const segmentGeometry = new THREE.BoxGeometry(2, 2, 1);
           const segmentMaterial = new THREE.MeshPhongMaterial({
-            color: new THREE.Color().setHSL(0.1 + i * 0.01, 0.8, 0.4),
-            emissive: 0x001144
+            color: new THREE.Color(0.4 + i * 0.003, 0.4 + i * 0.003, 0.4 + i * 0.003), // Grey variations
+            emissive: new THREE.Color(0.05, 0.05, 0.05) // Subtle grey emissive
           });
           const segment = new THREE.Mesh(segmentGeometry, segmentMaterial);
           segment.position.y = i;
@@ -273,7 +270,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
       return buildingGroup;
     };
 
-    // Generate futuristic metropolis
+    // Generate themed metropolis
     for (let i = 0; i < 80; i++) {
       const x = (Math.random() - 0.5) * 200;
       const z = (Math.random() - 0.5) * 200;
@@ -281,27 +278,27 @@ renderer.setPixelRatio(window.devicePixelRatio);
       const type = Math.floor(Math.random() * 4);
       
       if (Math.sqrt(x * x + z * z) > 15) {
-        buildings.add(createAdvancedBuilding(x, z, height, type));
+        buildings.add(createThemedBuilding(x, z, height, type));
       }
     }
 
-    // Central Nexus Tower
+    // Central Golden Nexus Tower
     const nexusGeometry = new THREE.CylinderGeometry(2, 8, 60, 12);
     const nexusMaterial = new THREE.MeshPhongMaterial({
-      color: 0x6a4c93,
+      color: 0x3a3441, // Dark navy
       transparent: true,
       opacity: 0.9,
-      emissive: 0x331155
+      emissive: 0x331100 // Golden emissive
     });
     const nexusTower = new THREE.Mesh(nexusGeometry, nexusMaterial);
     nexusTower.position.y = 30;
     nexusTower.castShadow = true;
     scene.add(nexusTower);
 
-    // Nexus energy field
+    // Golden nexus energy field
     const fieldGeometry = new THREE.SphereGeometry(12, 32, 32);
     const fieldMaterial = new THREE.MeshBasicMaterial({
-      color: 0x00ffff,
+      color: 0xffa500, // Golden orange
       transparent: true,
       opacity: 0.1,
       side: THREE.DoubleSide
@@ -310,15 +307,15 @@ renderer.setPixelRatio(window.devicePixelRatio);
     energyField.position.y = 30;
     scene.add(energyField);
 
-    // Flying vehicles
+    // Flying vehicles with golden accents
     const vehicles = new THREE.Group();
     vehiclesRef.current = vehicles;
     scene.add(vehicles);
 
     for (let i = 0; i < 15; i++) {
-      const vehicleGeometry = new THREE.CapsuleGeometry(0.5, 2, 4, 8);
+      const vehicleGeometry = new THREE.CylinderGeometry(0.3, 0.3, 2, 8);
       const vehicleMaterial = new THREE.MeshBasicMaterial({
-        color: new THREE.Color().setHSL(Math.random(), 0.8, 0.6),
+        color: new THREE.Color(1.0, 0.4 + Math.random() * 0.4, 0.0), // Golden variations
         transparent: true,
         opacity: 0.8
       });
@@ -340,7 +337,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
       vehicles.add(vehicle);
     }
 
-    // Holographic displays
+    // Golden holographic displays
     const holograms = new THREE.Group();
     hologramsRef.current = holograms;
     scene.add(holograms);
@@ -369,11 +366,12 @@ renderer.setPixelRatio(window.devicePixelRatio);
             float scanline = sin(uv.y * 20.0 + time * 10.0) * 0.5 + 0.5;
             float noise = fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
             
-            vec3 color = vec3(0.0, 0.8, 1.0);
-            color += vec3(0.5, 0.0, 1.0) * scanline;
+            // Golden color scheme
+            vec3 color = vec3(1.0, 0.6, 0.1);
+            color += vec3(1.0, 0.4, 0.0) * scanline;
             color += noise * 0.1;
             
-            float alpha = opacity * (0.8 + scanline * 0.2);
+            float alpha = opacity * (0.7 + scanline * 0.3);
             gl_FragColor = vec4(color, alpha);
           }
         `,
@@ -392,7 +390,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
       holograms.add(hologram);
     }
 
-    // Advanced particle system
+    // Golden particle system
     const particleCount = 2000;
     const particleGeometry = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
@@ -403,7 +401,8 @@ renderer.setPixelRatio(window.devicePixelRatio);
       particlePositions[i * 3 + 1] = Math.random() * 100;
       particlePositions[i * 3 + 2] = (Math.random() - 0.5) * 300;
       
-      const color = new THREE.Color().setHSL(Math.random() * 0.3 + 0.5, 1, 0.5);
+      // Golden particle colors
+      const color = new THREE.Color(1.0, 0.4 + Math.random() * 0.4, Math.random() * 0.2);
       particleColors[i * 3] = color.r;
       particleColors[i * 3 + 1] = color.g;
       particleColors[i * 3 + 2] = color.b;
@@ -424,16 +423,16 @@ renderer.setPixelRatio(window.devicePixelRatio);
     particlesRef.current = particles;
     scene.add(particles);
 
-    // Advanced lighting system
-    const ambientLight = new THREE.AmbientLight(0x1a1a2e, 0.4);
+    // Homepage-themed lighting system
+    const ambientLight = new THREE.AmbientLight(0x1a1f2e, 0.3); // Dark navy ambient
     scene.add(ambientLight);
 
-    // Main directional light (moon/sun)
-    const directionalLight = new THREE.DirectionalLight(0x4a90a4, 1.5);
+    // Main directional light with golden tint
+    const directionalLight = new THREE.DirectionalLight(0xffa500, 1.2); // Golden light
     directionalLight.position.set(30, 50, 30);
     directionalLight.castShadow = true;
-    directionalLight.shadow.mapSize.width = 4096;
-    directionalLight.shadow.mapSize.height = 4096;
+    directionalLight.shadow.mapSize.width = 2048;
+    directionalLight.shadow.mapSize.height = 2048;
     directionalLight.shadow.camera.near = 1;
     directionalLight.shadow.camera.far = 200;
     directionalLight.shadow.camera.left = -100;
@@ -442,11 +441,11 @@ renderer.setPixelRatio(window.devicePixelRatio);
     directionalLight.shadow.camera.bottom = -100;
     scene.add(directionalLight);
 
-    // City lights
+    // Golden city lights
     const cityLights = [];
     for (let i = 0; i < 12; i++) {
       const light = new THREE.PointLight(
-        new THREE.Color().setHSL(Math.random(), 0.8, 0.6),
+        new THREE.Color(1.0, 0.5 + Math.random() * 0.3, Math.random() * 0.2), // Golden variations
         2,
         80
       );
@@ -459,7 +458,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
       scene.add(light);
     }
 
-    // Atmospheric skybox
+    // Homepage-themed skybox
     const skyboxGeometry = new THREE.SphereGeometry(500, 32, 32);
     const skyboxMaterial = new THREE.ShaderMaterial({
       uniforms: {
@@ -481,18 +480,18 @@ renderer.setPixelRatio(window.devicePixelRatio);
           vec3 direction = normalize(vWorldPosition);
           float elevation = direction.y;
           
-          vec3 skyColor = vec3(0.05, 0.05, 0.15);
-          vec3 horizonColor = vec3(0.15, 0.1, 0.25);
+          // Homepage navy colors
+          vec3 skyColor = vec3(0.06, 0.08, 0.1); // Dark navy
+          vec3 horizonColor = vec3(0.1, 0.12, 0.18); // Lighter navy
           
           float mixFactor = pow(max(elevation, 0.0), 0.4);
           vec3 color = mix(horizonColor, skyColor, mixFactor);
           
-         
-          
-          // Add aurora effect
-          float aurora = sin(direction.x * 5.0 + time) * sin(direction.z * 3.0 + time * 0.7) * 0.1;
+          // Add golden aurora effect
+          float aurora = sin(direction.x * 5.0 + time) * sin(direction.z * 3.0 + time * 0.7) * 0.15;
           if (elevation > 0.3) {
-            color += vec3(0.0, aurora * 0.5, aurora) * max(0.0, elevation - 0.3);
+            // Golden aurora instead of blue
+            color += vec3(aurora * 0.8, aurora * 0.4, 0.0) * max(0.0, elevation - 0.3);
           }
           
           gl_FragColor = vec4(color, 1.0);
@@ -503,75 +502,64 @@ renderer.setPixelRatio(window.devicePixelRatio);
     const skybox = new THREE.Mesh(skyboxGeometry, skyboxMaterial);
     scene.add(skybox);
 
-    // Scroll-based interactions
-    let scrollY = 0;
-    const handleScroll = () => {
-      scrollY = window.scrollY;
-      const maxScroll = document.body.scrollHeight - window.innerHeight;
-      const scrollProgress = Math.min(scrollY / maxScroll, 1);
-      
-      // Dynamic camera movement
-      const targetDistance = 80 + (scrollProgress * 40);
-      const currentDistance = camera.position.distanceTo(new THREE.Vector3(0, 0, 0));
-      const newDistance = THREE.MathUtils.lerp(currentDistance, targetDistance, 0.05);
-      
-      const direction = camera.position.clone().normalize();
-      camera.position.copy(direction.multiplyScalar(newDistance));
-      
-      // Camera height adjustment
-      camera.position.y = 40 + (scrollProgress * 20);
-      
-      // FOV effects
-      camera.fov = 60 + (scrollProgress * 15);
-      camera.updateProjectionMatrix();
-      
-      // Fog effects
-      if (scene.fog) {
-        (scene.fog as THREE.Fog).near = 20 + (scrollProgress * 30);
-        (scene.fog as THREE.Fog).far = 300 - (scrollProgress * 100);
-      }
-      
-      // Auto-rotation speed
-      if (controls) {
-        controls.autoRotateSpeed = 0.3 + (scrollProgress * 0.7);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
     // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
       const time = Date.now() * 0.001;
+
+      // Simple camera rotation based on mouse
+      targetX = mouseX * 0.3;
+      targetY = mouseY * 0.3;
+      
+      camera.position.x += (targetX - camera.position.x) * 0.02;
+      camera.lookAt(0, 0, 0);
+
+      // Auto-rotate the camera around the scene
+      const radius = 80;
+      camera.position.x = Math.cos(time * 0.1) * radius;
+      camera.position.z = Math.sin(time * 0.1) * radius;
+      camera.lookAt(0, 10, 0);
 
       // Update ground shader
       if (ground.material.uniforms) {
         ground.material.uniforms.time.value = time;
       }
 
-      // Animate buildings
+      // Animate buildings with golden emissive
       if (buildings) {
         buildings.children.forEach((building, index) => {
           building.rotation.y = time * 0.05 + index * 0.1;
           building.position.y = Math.sin(time * 0.5 + index) * 0.3;
           
-          // Update building materials
           building.traverse((child: any) => {
             if (child.material && child.material.emissive) {
-              child.material.emissive.setHSL(
-                (time * 0.1 + index * 0.1) % 1,
-                0.5,
-                0.1 + Math.sin(time + index) * 0.05
-              );
+              // Check if it's a golden building (type 0) or grey building (types 1-3)
+              const buildingType = index % 4;
+              if (buildingType === 0) {
+                // Golden emissive animation for golden buildings
+                child.material.emissive.setRGB(
+                  0.3 + Math.sin(time + index) * 0.1,
+                  0.15 + Math.sin(time + index) * 0.05,
+                  0.0
+                );
+              } else {
+                // Grey emissive animation for grey buildings
+                const greyIntensity = 0.1 + Math.sin(time + index) * 0.05;
+                child.material.emissive.setRGB(greyIntensity, greyIntensity, greyIntensity);
+              }
             }
           });
         });
       }
 
-      // Animate nexus tower
+      // Animate nexus tower with golden glow
       if (nexusTower) {
         nexusTower.rotation.y = time * 0.1;
-        nexusTower.material.emissive.setHSL((time * 0.1) % 1, 0.6, 0.15);
+        nexusTower.material.emissive.setRGB(
+          0.4 + Math.sin(time * 2) * 0.1,
+          0.2 + Math.sin(time * 2) * 0.05,
+          0.0
+        );
       }
 
       // Animate energy field
@@ -617,8 +605,6 @@ renderer.setPixelRatio(window.devicePixelRatio);
       // Animate city lights
       cityLights.forEach((light, index) => {
         light.intensity = 2 + Math.sin(time * 3 + index) * 1;
-        light.position.x += Math.sin(time + index) * 0.1;
-        light.position.z += Math.cos(time + index) * 0.1;
       });
 
       // Update skybox
@@ -626,7 +612,6 @@ renderer.setPixelRatio(window.devicePixelRatio);
         skybox.material.uniforms.time.value = time;
       }
 
-      controls.update();
       renderer.render(scene, camera);
     };
 
@@ -645,7 +630,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 
     // Cleanup
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
       if (mountRef.current && renderer.domElement) {
         mountRef.current.removeChild(renderer.domElement);
@@ -659,7 +644,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
       ref={mountRef} 
       className="w-full h-full absolute inset-0"
       style={{ 
-        background: 'radial-gradient(ellipse at center, #1a1a2e 0%, #0a0a0a 70%)'
+        background: 'radial-gradient(ellipse at center, #1a1f2e 0%, #0f1419 70%)'
       }} 
     />
   );

@@ -46,7 +46,7 @@ const Nav = () => {
           
           {/* Premium Contact Button */}
           <a 
-            href='https://wa.me/+919850455290' 
+            href='https://wa.me/+919322985826' 
             className='group rounded-lg btn-premium px-2 py-3 text-xs font-heading transform -rotate-90 whitespace-nowrap hover:scale-110 focus-premium border border-amber-500/20 relative overflow-hidden'
           >
             <span className="relative z-10 flex items-center gap-2">

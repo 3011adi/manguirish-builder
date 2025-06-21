@@ -338,16 +338,192 @@ const Page = () => {
    </div>
  </section>
 
-<section  className='bg-black' id='details'>
-  <h1 className='text-white font-serif bg-black text-8xl p-6 text-center'> details</h1>
-  <div className='grid grid-cols-2 pl-28 '>
-    <div className=' p-4 rounded-3xl'><Map/></div>
-    <div className='p-4 '><Carousel1 /></div>
-  </div>
-  <div className='flex items-center justify-end p-5'>
-  <a href=''> <h1 className='text-white  text-3xl  m-5 rounded-3xl shadow-lg shadow-white bg-gradient-to-r from-red-500 to-blue-500  flex items-center p-2 px-8 justify-center bottom-0'> price 80lk</h1> </a>
-  </div>
-</section>
+ {/* Premium Details Section */}
+ <section className='min-h-screen bg-gradient-to-br from-slate-950 via-gray-900 to-stone-900 py-20' id='details'>
+   <div className='max-w-7xl mx-auto px-8'>
+     {/* Premium Section Header */}
+     <div className='text-center mb-16'>
+       <div className='w-20 h-0.5 bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 mx-auto mb-8'></div>
+       <h1 className='font-display text-5xl lg:text-7xl font-light text-white tracking-tight leading-none mb-6'>
+         <span className='text-gradient-gold font-bold'>PROJECT</span>
+         <br />
+         <span className='font-heading font-extralight text-gray-300 text-3xl lg:text-5xl tracking-[0.15em] uppercase'>
+           DETAILS
+         </span>
+       </h1>
+       <p className='font-body text-gray-300 text-lg lg:text-xl leading-relaxed max-w-2xl mx-auto'>
+         Explore comprehensive project information including location, gallery, and investment details for this premium development.
+       </p>
+     </div>
+
+     {/* Premium Content Grid */}
+     <div className='grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-16'>
+       
+       {/* Location & Map */}
+       <div className='glass-premium border border-amber-500/10 rounded-3xl p-8 shadow-premium'>
+         <div className='mb-6'>
+           <div className='flex items-center gap-4 mb-4'>
+             <div className='w-12 h-0.5 bg-gradient-to-r from-amber-400 to-amber-500'></div>
+             <span className='font-heading text-amber-400 text-sm uppercase tracking-wider'>Location</span>
+           </div>
+           <h3 className='font-display text-2xl lg:text-3xl font-bold text-gradient-gold mb-4'>
+             Prime Location Map
+           </h3>
+           <p className='font-body text-gray-300 leading-relaxed mb-6'>
+             Strategically located in a premium neighborhood with excellent connectivity and access to all major amenities.
+           </p>
+         </div>
+         
+         <div className='bg-gradient-to-br from-slate-800 to-gray-800 rounded-2xl p-6 border border-amber-500/10 h-64 lg:h-80 flex items-center justify-center'>
+           <Map/>
+         </div>
+
+         {/* Location Features */}
+         <div className='grid grid-cols-2 gap-4 mt-6'>
+           <div className='glass-gold p-3 rounded-lg'>
+             <h4 className='font-heading text-amber-200 font-semibold text-sm mb-1'>Transport</h4>
+             <p className='font-body text-gray-300 text-xs'>5 min to metro</p>
+           </div>
+           <div className='glass-gold p-3 rounded-lg'>
+             <h4 className='font-heading text-amber-200 font-semibold text-sm mb-1'>Schools</h4>
+             <p className='font-body text-gray-300 text-xs'>Top institutions nearby</p>
+           </div>
+           <div className='glass-gold p-3 rounded-lg'>
+             <h4 className='font-heading text-amber-200 font-semibold text-sm mb-1'>Shopping</h4>
+             <p className='font-body text-gray-300 text-xs'>Premium malls</p>
+           </div>
+           <div className='glass-gold p-3 rounded-lg'>
+             <h4 className='font-heading text-amber-200 font-semibold text-sm mb-1'>Healthcare</h4>
+             <p className='font-body text-gray-300 text-xs'>Multi-specialty hospitals</p>
+           </div>
+         </div>
+       </div>
+
+       {/* Project Gallery */}
+       <div className='glass-premium border border-amber-500/10 rounded-3xl p-8 shadow-premium'>
+         <div className='mb-6'>
+           <div className='flex items-center gap-4 mb-4'>
+             <div className='w-12 h-0.5 bg-gradient-to-r from-amber-400 to-amber-500'></div>
+             <span className='font-heading text-amber-400 text-sm uppercase tracking-wider'>Gallery</span>
+           </div>
+           <h3 className='font-display text-2xl lg:text-3xl font-bold text-gradient-gold mb-4'>
+             Project Showcase
+           </h3>
+           <p className='font-body text-gray-300 leading-relaxed mb-6'>
+             Browse through our comprehensive gallery showcasing exteriors, interiors, and architectural plans.
+           </p>
+         </div>
+         
+         <div className='bg-gradient-to-br from-slate-800 to-gray-800 rounded-2xl p-4 border border-amber-500/10'>
+           <Carousel1 />
+         </div>
+
+         {/* Gallery Stats */}
+         <div className='grid grid-cols-3 gap-4 mt-6'>
+           <div className='glass-gold p-3 rounded-lg text-center'>
+             <h4 className='font-display text-lg text-gradient-gold font-bold'>25+</h4>
+             <p className='font-body text-gray-300 text-xs'>Photos</p>
+           </div>
+           <div className='glass-gold p-3 rounded-lg text-center'>
+             <h4 className='font-display text-lg text-gradient-gold font-bold'>4K</h4>
+             <p className='font-body text-gray-300 text-xs'>Resolution</p>
+           </div>
+           <div className='glass-gold p-3 rounded-lg text-center'>
+             <h4 className='font-display text-lg text-gradient-gold font-bold'>360°</h4>
+             <p className='font-body text-gray-300 text-xs'>Views</p>
+           </div>
+         </div>
+       </div>
+
+     </div>
+
+     {/* Premium Investment Section */}
+     <div className='glass-premium border border-amber-500/10 rounded-3xl p-8 lg:p-12 shadow-premium'>
+       <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 items-center'>
+         
+         {/* Investment Details */}
+         <div className='lg:col-span-2 space-y-6'>
+           <div>
+             <div className='flex items-center gap-4 mb-6'>
+               <div className='w-12 h-0.5 bg-gradient-to-r from-amber-400 to-amber-500'></div>
+               <span className='font-heading text-amber-400 text-sm uppercase tracking-wider'>Investment Opportunity</span>
+             </div>
+             <h3 className='font-display text-3xl lg:text-4xl font-bold text-gradient-gold mb-6'>
+               Premium Property Investment
+             </h3>
+             <p className='font-body text-gray-300 leading-relaxed text-lg mb-8'>
+               A strategic investment opportunity in prime real estate with excellent appreciation potential and guaranteed returns. This premium development offers modern amenities and world-class construction quality.
+             </p>
+           </div>
+
+           {/* Investment Features */}
+           <div className='grid grid-cols-2 gap-6'>
+             <div className='glass-gold p-4 rounded-xl'>
+               <h4 className='font-heading text-amber-200 font-semibold mb-2'>ROI Potential</h4>
+               <p className='font-body text-gray-300 text-sm'>15-20% annual appreciation</p>
+             </div>
+             <div className='glass-gold p-4 rounded-xl'>
+               <h4 className='font-heading text-amber-200 font-semibold mb-2'>Payment Plans</h4>
+               <p className='font-body text-gray-300 text-sm'>Flexible financing options</p>
+             </div>
+             <div className='glass-gold p-4 rounded-xl'>
+               <h4 className='font-heading text-amber-200 font-semibold mb-2'>Completion</h4>
+               <p className='font-body text-gray-300 text-sm'>Ready for possession</p>
+             </div>
+             <div className='glass-gold p-4 rounded-xl'>
+               <h4 className='font-heading text-amber-200 font-semibold mb-2'>Legal Clarity</h4>
+               <p className='font-body text-gray-300 text-sm'>Clear title & approvals</p>
+             </div>
+           </div>
+         </div>
+
+         {/* Premium Pricing Card */}
+         <div className='lg:col-span-1'>
+           <div className='glass-gold border border-amber-500/20 rounded-2xl p-8 text-center shadow-gold'>
+             <div className='mb-6'>
+               <span className='font-heading text-amber-200 text-sm uppercase tracking-wider block mb-2'>Starting Price</span>
+               <div className='font-display text-4xl lg:text-5xl font-bold text-gradient-gold mb-2'>
+                 ₹80L
+               </div>
+               <p className='font-body text-gray-300 text-sm'>*Inclusive of all taxes</p>
+             </div>
+
+             <div className='space-y-4 mb-8'>
+               <div className='flex justify-between items-center'>
+                 <span className='font-body text-gray-300 text-sm'>Base Price</span>
+                 <span className='font-heading text-amber-200 text-sm'>₹1cr</span>
+               </div>
+               <div className='flex justify-between items-center'>
+                 <span className='font-body text-gray-300 text-sm'>Registration</span>
+                 <span className='font-heading text-amber-200 text-sm'>₹10L</span>
+               </div>
+               <div className='flex justify-between items-center'>
+                 <span className='font-body text-gray-300 text-sm'>Other Charges</span>
+                 <span className='font-heading text-amber-200 text-sm'>₹10L</span>
+               </div>
+               <div className='w-full h-px bg-amber-500/20'></div>
+               <div className='flex justify-between items-center'>
+                 <span className='font-heading text-amber-200 font-semibold'>Total</span>
+                 <span className='font-display text-xl text-gradient-gold font-bold'>₹1.2Cr</span>
+               </div>
+             </div>
+
+             <a 
+               href='https://wa.me/+919322985826' 
+               className='w-full inline-flex items-center justify-center gap-3 btn-premium font-heading px-6 py-4 text-sm border border-amber-500/20 focus-premium'
+             >
+               <span className="relative z-10">Book Now</span>
+               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+               </svg>
+             </a>
+           </div>
+         </div>
+
+       </div>
+     </div>
+   </div>
+ </section>
 <section id='about'>
 <Footer />
 </section>
