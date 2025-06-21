@@ -15,7 +15,6 @@ const Home = () => {
   const [borderRadius1, setBorderRadius1] = useState('54% 46% 27% 73% / 71% 43% 57% 29% ');
   const [borderRadius2, setBorderRadius2] = useState('76% 24% 27% 73% / 65% 56% 44% 35%');
   const [borderRadius3, setBorderRadius3] = useState('6% 94% 9% 91% / 57% 43% 57% 43% ');
-  const [isMobile, setIsMobile] = useState(false);
   
   // Refs for GSAP animations
   const containerRef = useRef(null);
@@ -32,29 +31,7 @@ const Home = () => {
   const statsRef = useRef(null);
   const brandLineRef = useRef(null);
 
-  // Mobile detection
   useEffect(() => {
-    const checkMobile = () => {
-      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
-      const mobileRegex = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
-      const isSmallScreen = window.innerWidth < 768;
-      setIsMobile(mobileRegex.test(userAgent) || isSmallScreen);
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  useEffect(() => {
-    // Skip GSAP animations on mobile
-    if (isMobile) {
-      // Set static content for mobile
-      if (subtitleRef.current) {
-        subtitleRef.current.textContent = "EXCELLENCE IN CONSTRUCTION & ARCHITECTURE";
-      }
-      return;
-    }
     const ctx = gsap.context(() => {
       // Create sophisticated floating particles
       createProfessionalParticles();
@@ -217,9 +194,6 @@ const Home = () => {
   }, []);
 
   const createProfessionalParticles = () => {
-    // Skip particles on mobile
-    if (isMobile) return;
-    
     const particleContainer = particleContainerRef.current;
     if (!particleContainer) return;
 
@@ -248,9 +222,6 @@ const Home = () => {
 
   // Subtle mouse interaction
   const handleMouseMove = (e) => {
-    // Skip mouse interactions on mobile
-    if (isMobile) return;
-    
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
     
@@ -268,9 +239,6 @@ const Home = () => {
 
   // Refined blob animation with professional timing
   useEffect(() => {
-    // Skip blob morphing animations on mobile
-    if (isMobile) return;
-    
     const interval1 = setInterval(() => {
       const newBorderRadius = `${45 + Math.floor(Math.random() * 20)}% ${35 + Math.floor(Math.random() * 20)}% ${40 + Math.floor(Math.random() * 20)}% ${50 + Math.floor(Math.random() * 20)}% / ${55 + Math.floor(Math.random() * 15)}% ${40 + Math.floor(Math.random() * 15)}% ${45 + Math.floor(Math.random() * 15)}% ${35 + Math.floor(Math.random() * 15)}%`;
       setBorderRadius1(newBorderRadius);
@@ -291,7 +259,7 @@ const Home = () => {
       clearInterval(interval2);
       clearInterval(interval3);
     };
-  }, [isMobile]);
+  }, []);
 
   return (
     <div ref={containerRef} className='relative overflow-hidden' onMouseMove={handleMouseMove}> 
@@ -361,22 +329,18 @@ const Home = () => {
                   ref={buttonRef}
                    className='group btn-premium font-heading px-8 lg:px-12 py-4 lg:py-5 text-sm lg:text-base border border-amber-500/20 focus-premium'
                   onMouseEnter={(e) => {
-                    if (!isMobile) {
-                      gsap.to(e.target, {
-                        scale: 1.05,
-                        duration: 0.4,
-                        ease: "power2.out"
-                      });
-                    }
+                    gsap.to(e.target, {
+                      scale: 1.05,
+                      duration: 0.4,
+                      ease: "power2.out"
+                    });
                   }}
                   onMouseLeave={(e) => {
-                    if (!isMobile) {
-                      gsap.to(e.target, {
-                        scale: 1,
-                        duration: 0.4,
-                        ease: "power2.out"
-                      });
-                    }
+                    gsap.to(e.target, {
+                      scale: 1,
+                      duration: 0.4,
+                      ease: "power2.out"
+                    });
                   }}
                 >
                   <span className="relative z-10 flex items-center gap-3">
@@ -415,24 +379,20 @@ const Home = () => {
                 ref={imageRef}
                 className="relative group cursor-pointer"
                 onMouseEnter={(e) => {
-                  if (!isMobile) {
-                    gsap.to(e.currentTarget, {
-                      scale: 1.08,
-                      y: -10,
-                      duration: 0.8,
-                      ease: "power2.out"
-                    });
-                  }
+                  gsap.to(e.currentTarget, {
+                    scale: 1.08,
+                    y: -10,
+                    duration: 0.8,
+                    ease: "power2.out"
+                  });
                 }}
                 onMouseLeave={(e) => {
-                  if (!isMobile) {
-                    gsap.to(e.currentTarget, {
-                      scale: 1,
-                      y: 0,
-                      duration: 0.8,
-                      ease: "power2.out"
-                    });
-                  }
+                  gsap.to(e.currentTarget, {
+                    scale: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out"
+                  });
                 }}
               >
                 <Image
