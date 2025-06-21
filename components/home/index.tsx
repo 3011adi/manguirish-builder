@@ -355,7 +355,7 @@ const Home = () => {
             </div>
           </div>
      
-          <div className='h-[60vh] sm:h-[70vh] lg:h-screen flex items-center justify-center lg:w-[50%] w-full relative overflow-hidden'>
+          <div className='hidden md:flex h-[60vh] sm:h-[70vh] lg:h-screen items-center justify-center lg:w-[50%] w-full relative overflow-hidden'>
             {/* Sophisticated Morphing Blobs */}
             <div 
               ref={blob1Ref}
