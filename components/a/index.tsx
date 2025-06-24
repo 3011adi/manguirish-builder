@@ -39,17 +39,17 @@ const CrystalSpire = () => {
 
             // --- Camera Setup ---
             camera = new THREE.PerspectiveCamera(60, currentMount.clientWidth / currentMount.clientHeight, 0.1, 1000);
-            camera.position.set(12, 8, 12);
+            camera.position.set(0, 12, 15);
 
             // --- Controls ---
             controls = new OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
             controls.dampingFactor = 0.05;
-            controls.minDistance = 10;
-            controls.maxDistance = 30;
+            controls.minDistance = 12;
+            controls.maxDistance = 40;
             controls.autoRotate = true;
-            controls.autoRotateSpeed = 1.0;
-            controls.target.set(0, 4, 0);
+            controls.autoRotateSpeed = 0.5;
+            controls.target.set(0, 8, 0);
             controls.maxPolarAngle = Math.PI * 0.85;
             controls.minPolarAngle = Math.PI * 0.15;
 
@@ -78,68 +78,145 @@ const CrystalSpire = () => {
         // === GEOMETRY AND MESH CREATION ===
         const createCrystalTower = () => {
             crystalTower = new THREE.Group();
-            const numCrystals = 12;
-            const crystalHeight = 8;
 
-            const material = new THREE.MeshPhysicalMaterial({
+            // Burj Khalifa-inspired materials
+            const glassMaterial = new THREE.MeshPhysicalMaterial({
                 color: 0x87ceeb,
                 metalness: 0.1,
-                roughness: 0.05,
-                transmission: 0.9,
+                roughness: 0.1,
+                transmission: 0.8,
                 ior: 1.5,
-                thickness: 0.5,
+                thickness: 0.1,
                 transparent: true,
-                opacity: 0.9,
+                opacity: 0.7,
                 side: THREE.DoubleSide,
                 clearcoat: 1.0,
-                clearcoatRoughness: 0.1
+                clearcoatRoughness: 0.05
             });
 
-            // Create main central tower
-            const mainHeight = 10;
-            const mainRadius = 0.8;
-            const mainGeo = new THREE.CylinderGeometry(mainRadius * 0.3, mainRadius, mainHeight, 8);
-            const mainCrystal = new THREE.Mesh(mainGeo, material);
-            mainCrystal.position.set(0, mainHeight / 2, 0);
-            crystalTower.add(mainCrystal);
+            const steelMaterial = new THREE.MeshStandardMaterial({
+                color: 0x404040,
+                metalness: 0.9,
+                roughness: 0.1,
+                envMapIntensity: 1.0
+            });
 
-            // Create surrounding crystals
-            for (let i = 0; i < numCrystals; i++) {
-                const height = Math.random() * crystalHeight + 3;
-                const radius = Math.random() * 0.3 + 0.15;
-                const geo = new THREE.CylinderGeometry(radius * 0.2, radius, height, 6);
-                const crystal = new THREE.Mesh(geo, material);
+            // Create the main tower with Burj Khalifa-like design
+            const totalHeight = 15;
+            const numLevels = 8;
+            const levelHeight = totalHeight / numLevels;
 
-                const angle = (i / numCrystals) * Math.PI * 2;
-                const distance = Math.random() * 2 + 1.5;
-                crystal.position.set(
-                    Math.cos(angle) * distance, 
-                    height / 2, 
-                    Math.sin(angle) * distance
-                );
-                crystal.rotation.y = angle + Math.random() * 0.5;
-                crystal.rotation.x = (Math.random() - 0.5) * 0.2;
-                crystal.rotation.z = (Math.random() - 0.5) * 0.2;
-                crystalTower.add(crystal);
+            for (let level = 0; level < numLevels; level++) {
+                const progress = level / (numLevels - 1);
+                const heightFromBottom = level * levelHeight;
+                
+                // Tapering: wider at bottom, narrower at top
+                const baseRadius = 1.2 * (1 - progress * 0.7);
+                const topRadius = baseRadius * 0.85;
+                
+                // Create main building segment
+                const geo = new THREE.CylinderGeometry(topRadius, baseRadius, levelHeight, 8);
+                const building = new THREE.Mesh(geo, glassMaterial);
+                building.position.y = heightFromBottom + levelHeight / 2;
+                
+                // Add slight twist like Burj Khalifa
+                building.rotation.y = progress * Math.PI * 0.3;
+                
+                crystalTower.add(building);
+
+                // Add steel frame details every few levels
+                if (level % 2 === 0) {
+                    const frameGeo = new THREE.CylinderGeometry(baseRadius + 0.02, baseRadius + 0.02, 0.1, 8);
+                    const frame = new THREE.Mesh(frameGeo, steelMaterial);
+                    frame.position.y = heightFromBottom;
+                    crystalTower.add(frame);
+                }
+
+                // Add setbacks (step-ins) at certain levels
+                if (level === 3 || level === 5) {
+                    const setbackGeo = new THREE.CylinderGeometry(topRadius * 0.9, baseRadius * 0.9, levelHeight * 0.1, 8);
+                    const setback = new THREE.Mesh(setbackGeo, steelMaterial);
+                    setback.position.y = heightFromBottom + levelHeight;
+                    crystalTower.add(setback);
+                }
             }
-            
-            // Scale down the entire tower group
+
+            // Add the iconic spire at the top
+            const spireHeight = 3;
+            const spireGeo = new THREE.CylinderGeometry(0.05, 0.15, spireHeight, 6);
+            const spire = new THREE.Mesh(spireGeo, steelMaterial);
+            spire.position.y = totalHeight + spireHeight / 2;
+            crystalTower.add(spire);
+
+            // Add antenna at the very top
+            const antennaGeo = new THREE.CylinderGeometry(0.01, 0.01, 1, 4);
+            const antenna = new THREE.Mesh(antennaGeo, steelMaterial);
+            antenna.position.y = totalHeight + spireHeight + 0.5;
+            crystalTower.add(antenna);
+
+            // Add LED lighting strips (decorative elements)
+            for (let i = 0; i < 6; i++) {
+                const lightStripGeo = new THREE.BoxGeometry(0.02, totalHeight * 0.8, 0.02);
+                const lightStripMat = new THREE.MeshStandardMaterial({
+                    color: 0x00ff88,
+                    emissive: 0x004422,
+                    transparent: true,
+                    opacity: 0.6,
+                    metalness: 0.1,
+                    roughness: 0.3
+                });
+                const lightStrip = new THREE.Mesh(lightStripGeo, lightStripMat);
+                
+                const angle = (i / 6) * Math.PI * 2;
+                const radius = 0.8;
+                lightStrip.position.x = Math.cos(angle) * radius;
+                lightStrip.position.z = Math.sin(angle) * radius;
+                lightStrip.position.y = totalHeight * 0.4;
+                
+                crystalTower.add(lightStrip);
+            }
+
+            // Scale and position the tower
             crystalTower.scale.setScalar(0.8);
+            crystalTower.position.y = 0;
             scene.add(crystalTower);
         };
 
         const createGround = () => {
-            const geo = new THREE.CylinderGeometry(8, 8, 0.1, 32);
+            // Main plaza base
+            const geo = new THREE.CylinderGeometry(10, 10, 0.2, 32);
             const mat = new THREE.MeshStandardMaterial({ 
-                color: 0x1a1a2a, 
-                metalness: 0.9, 
-                roughness: 0.2,
+                color: 0x2a2a3a, 
+                metalness: 0.7, 
+                roughness: 0.3,
                 transparent: true,
-                opacity: 0.8
+                opacity: 0.9
             });
             const ground = new THREE.Mesh(geo, mat);
-            ground.position.y = -0.05;
+            ground.position.y = -0.1;
             scene.add(ground);
+
+            // Add some surrounding smaller buildings for context
+            for (let i = 0; i < 8; i++) {
+                const height = Math.random() * 2 + 1;
+                const width = Math.random() * 0.5 + 0.3;
+                const buildingGeo = new THREE.BoxGeometry(width, height, width);
+                const buildingMat = new THREE.MeshStandardMaterial({
+                    color: 0x404050,
+                    metalness: 0.8,
+                    roughness: 0.2
+                });
+                const building = new THREE.Mesh(buildingGeo, buildingMat);
+                
+                const angle = (i / 8) * Math.PI * 2;
+                const distance = 6 + Math.random() * 2;
+                building.position.set(
+                    Math.cos(angle) * distance,
+                    height / 2,
+                    Math.sin(angle) * distance
+                );
+                scene.add(building);
+            }
         };
 
         const createParticles = () => {
