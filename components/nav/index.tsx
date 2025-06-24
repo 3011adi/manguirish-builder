@@ -67,7 +67,7 @@ const Nav = () => {
             <div className='flex-shrink-0'>
               <div className='flex flex-col'>
                 <span className='font-display text-xl font-bold text-gradient-gold'>
-                  MANGUIRISH
+                  L&L
                 </span>
                 <span className='font-heading text-xs text-amber-200/70 tracking-[0.2em] uppercase -mt-1'>
                   BUILDERS
