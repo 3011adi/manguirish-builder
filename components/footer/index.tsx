@@ -30,7 +30,7 @@ const Footer = () => {
             <div className='glass-premium border border-amber-500/10 rounded-2xl p-6 shadow-premium text-center lg:text-left'>
               <div className='mb-6'>
                 <h1 className='font-display text-2xl lg:text-3xl font-bold text-gradient-gold mb-2'>
-                  Manguirish
+                  L&L
                 </h1>
                 <span className='font-heading text-amber-200 text-lg uppercase tracking-wider'>
                   Builders
@@ -94,7 +94,7 @@ const Footer = () => {
                 </a>
                 
                 <a 
-                  href='mailto:mangirish.builders@gmail.com' 
+                  href='mailto:L&L.builders@gmail.com' 
                   className='group flex items-center gap-3 font-body text-gray-300 hover:text-amber-300 transition-colors duration-300'
                 >
                   <div className='w-8 h-8 bg-amber-500/20 rounded-lg flex items-center justify-center group-hover:bg-amber-500/30 transition-colors duration-300'>
@@ -102,7 +102,7 @@ const Footer = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                   </div>
-                  <span className='text-sm'>mangirish.builders@gmail.com</span>
+                  <span className='text-sm'>L&L.builders@gmail.com</span>
                 </a>
 
                 <a 
@@ -135,7 +135,7 @@ const Footer = () => {
                   </svg>
                 </div>
                 <p className='font-body text-gray-300 text-sm leading-relaxed'>
-                  Opposite To Hotel Spice Goa, Near Karaswada Sicle, Mapusa, North Goa, Goa
+                  Margao, South Goa, Goa
                 </p>
               </div>
             </div>

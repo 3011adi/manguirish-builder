@@ -50,8 +50,8 @@ const Home = () => {
               <div className='space-y-4 lg:space-y-6'>
                 <div className='space-y-2'>
                   <h1 className='font-display text-5xl sm:text-6xl lg:text-8xl font-light text-white tracking-tight leading-none'>
-                    <span className='block font-heading font-extralight text-gray-300 text-4xl sm:text-5xl lg:text-6xl mb-2 tracking-[0.15em] uppercase'>
-                    manguirish
+                    <span className='block font-serif text-gray-300 text-5xl sm:text-6xl lg:text-8xl mb-2 tracking-[0.15em] uppercase'>
+                    L&L
                   </span>
                     <span className='font-display text-gradient-gold font-bold tracking-tighter'>
                       BUILDERS
@@ -87,7 +87,10 @@ const Home = () => {
               
               {/* Premium Call to Action */}
               <div className='pt-8 lg:pt-12'>
-                <button className='group btn-premium font-heading px-8 lg:px-12 py-4 lg:py-5 text-sm lg:text-base border border-amber-500/20 focus-premium hover:scale-105 transition-transform duration-300'>
+                <button 
+                  onClick={() => document.getElementById('details')?.scrollIntoView({ behavior: 'smooth' })}
+                  className='group btn-premium font-heading px-8 lg:px-12 py-4 lg:py-5 text-sm lg:text-base border border-amber-500/20 focus-premium hover:scale-105 transition-transform duration-300'
+                >
                   <span className="relative z-10 flex items-center gap-3">
                     View Portfolio
                     <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
